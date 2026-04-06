@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/CSS/style.css}">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">&#10003;</span>
+                <span class="logo-text">TaskFlow</span>
+            </div>
+            <div class="header-stats">
+                <span th:text="${items.size()} + ' tareas activas'">0 tareas activas</span>
+            </div>
+        </div>
+    </header>
+
+    <div th:if="${success}" class="toast toast-success">
+        <span class="toast-icon">&#10003;</span>
+        <span th:text="${success}"></span>
+    </div>
+
+    <main>
+        <div class="layout">
+
+            <!-- Formulario -->
+            <div class="card form-card">
+                <div class="card-header">
+                    <div>
+                        <h2>Nueva Tarea</h2>
+                        <p>Agrega una tarea a tu lista</p>
+                    </div>
+                </div>
+                <form th:action="@{/agregar}" th:object="${item}" method="post">
+                    <div class="field-group" th:classappend="${#fields.hasErrors('nombre')} ? 'has-error' : ''">
+                        <label for="nombre">Nombre de la tarea</label>
+                        <input type="text"
+                               id="nombre"
+                               th:field="*{nombre}"
+                               placeholder="Ej: Revisar documentación..."
+                               minlength="2"
+                               maxlength="100"
+                               autocomplete="off">
+                        <span class="field-error"
+                              th:if="${#fields.hasErrors('nombre')}"
+                              th:errors="*{nombre}"></span>
+                    </div>
+                    <button type="submit" class="btn-primary">Agregar tarea</button>
+                </form>
+            </div>
+
+            <!-- Lista -->
+            <div class="card list-card">
+                <div class="card-header">
+                    <div>
+                        <h2>Lista de Tareas</h2>
+                        <p>Todas las tareas registradas</p>
+                    </div>
+                    <span class="badge" th:text="${items.size()}">0</span>
+                </div>
+
+                <div th:if="${#lists.isEmpty(items)}" class="empty-state">
+                    <h3>Sin tareas aún</h3>
+                    <p>Agrega tu primera tarea usando el formulario de la izquierda.</p>
+                </div>
+
+                <ul th:unless="${#lists.isEmpty(items)}" class="task-list">
+                    <li th:each="i : ${items}" class="task-item">
+                        <span class="task-id" th:text="'#' + ${i.id}"></span>
+                        <span class="task-name" th:text="${i.nombre}"></span>
+                        <span class="task-status">Activo</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
