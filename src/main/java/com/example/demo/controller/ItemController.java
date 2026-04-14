@@ -36,4 +36,4 @@ public class ItemController {
         flash.addFlashAttribute("success", "¡Tarea \"" + item.getNombre() + "\" creada correctamente!");
         return "redirect:/";
     }
-}
+}   
