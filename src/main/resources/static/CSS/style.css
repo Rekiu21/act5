@@ -349,6 +349,215 @@ main {
   line-height: 1.6;
 }
 
+/* ─── TOAST ERROR ────────────────────────────────────── */
+.toast-error {
+  background: #fff5f5;
+  color: #7f1d1d;
+  border: 1px solid #fecaca;
+}
+
+.toast-icon-error {
+  background: var(--error) !important;
+}
+
+/* ─── TASK ACTIONS ───────────────────────────────────── */
+.task-actions {
+  display: flex;
+  gap: .375rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.btn-icon {
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  background: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, border-color .15s, color .15s;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.btn-edit {
+  color: var(--primary);
+}
+.btn-edit:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.btn-delete {
+  color: var(--error);
+}
+.btn-delete:hover {
+  background: #fff5f5;
+  border-color: #fca5a5;
+}
+
+/* ─── MODAL ──────────────────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15,20,40,.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(3px);
+}
+
+.modal-overlay.open {
+  display: flex;
+  animation: overlayIn .2s ease;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 440px;
+  animation: modalIn .25s cubic-bezier(.34,1.56,.64,1);
+  overflow: hidden;
+}
+
+@keyframes modalIn {
+  from { transform: scale(.93) translateY(14px); opacity: 0; }
+  to   { transform: scale(1)   translateY(0);    opacity: 1; }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem .75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.modal-close {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: background .15s, color .15s;
+  padding: 0;
+}
+.modal-close:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.modal-body {
+  padding: 1.25rem 1.5rem;
+}
+
+.modal-body-center {
+  text-align: center;
+  padding: 2rem 1.5rem 1.25rem;
+}
+
+.modal-danger-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  color: var(--error);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.modal-body-center h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: .5rem;
+}
+
+.modal-desc {
+  font-size: .85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .75rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+
+/* ─── SECONDARY & DANGER BUTTONS ─────────────────────── */
+.btn-secondary {
+  padding: .7rem 1.25rem;
+  font-size: .875rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text-muted);
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.btn-secondary:hover {
+  background: var(--bg);
+  color: var(--text);
+  border-color: #c8ccdb;
+}
+
+.btn-danger {
+  padding: .7rem 1.25rem;
+  font-size: .875rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: #fff;
+  background: var(--error);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background .15s, box-shadow .15s;
+  box-shadow: 0 2px 8px rgba(224,82,82,.28);
+}
+.btn-danger:hover {
+  background: #c83b3b;
+  box-shadow: 0 4px 12px rgba(224,82,82,.35);
+}
+
+.btn-modal-submit {
+  width: auto;
+  padding: .7rem 1.5rem;
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 800px) {
   .layout {
@@ -361,5 +570,8 @@ main {
   .toast {
     right: 12px;
     left: 12px;
+  }
+  .task-status {
+    display: none;
   }
 }
